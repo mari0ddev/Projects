@@ -36,13 +36,13 @@ function getWeather() {
        
         const next24Hours = hourlyData.slice(0, 8); 
     
-        // Parcurgem datele și le adăugăm în div-ul pentru prognoza orară
+       
         next24Hours.forEach(item => {
             const dateTime = new Date(item.dt * 1000);
             const hour = dateTime.getHours();
-            const temperature = Math.round(item.main.temp); // Temperatura
-            const iconCode = item.weather[0].icon; // Codul imaginii pentru vreme
-            const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`; // URL-ul imaginii
+            const temperature = Math.round(item.main.temp); 
+            const iconCode = item.weather[0].icon; 
+            const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`; // 
     
             // Creăm HTML-ul pentru fiecare oră
             const hourlyItemHtml = `
@@ -112,9 +112,10 @@ function displayWeather(data) {
         const dewPoint = data.main.temp_min; 
 
         // Alegem imaginea în funcție de vreme
-        let localImage = "images/cersenin.png"; 
+        let localImage = "images/cersenin.png"; // Default: cer senin
+
         if (weatherMain.includes("cloud")) {
-            localImage = "images/cloudlyyy.png";
+            localImage = "images/clouddd.png";
         } else if (weatherMain.includes("rain")) {
             localImage = "images/rain.png";
         } else if (weatherMain.includes("snow")) {
@@ -123,8 +124,12 @@ function displayWeather(data) {
             localImage = "images/rainyyyyyyy.png";
         } else if (weatherMain.includes("sun") || weatherMain.includes("sun")) {
             localImage = "images/sunpixel.png";
+        } else if (weatherMain.includes("clear")) { // Condiția pentru Clear Sky
+            localImage = "images/sunnyyyycloud.png";
+        } else if (weatherMain.includes("overcast")) { // Condiția pentru Overcast Sky
+            localImage = "images/cloudlyyy.png";
         }
-
+        
         
         tempDivInfo.innerHTML = `<p>${temperature}°C</p>`;
         weatherInfoDiv.innerHTML = `<p>${cityName}</p><p>${description}</p>`;
@@ -166,3 +171,12 @@ function getWindDirection(degree) {
         return "NW (Nord-Vest)";
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Event listener pentru Enter
+    document.getElementById('city').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            getWeather(); // Apelează funcția pentru a obține vremea
+        }
+    });
+});
