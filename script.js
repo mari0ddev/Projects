@@ -119,7 +119,7 @@ function displayWeather(data) {
             localImage = "images/sunpixel.png";
         } else if (weatherMain.includes("clear")) {
             localImage = "images/sunnyyyycloud.png";
-        } else if (weatherMain.includes("overcast")) {
+        } else if (weatherMain.includes("overcast clouds")) {
             localImage = "images/cloudlyyy.png";
         }
         else if (weatherMain.includes("Broken clouds")) {
