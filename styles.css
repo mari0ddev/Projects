@@ -43,11 +43,14 @@ input {
     border-radius: 10px;
     border: 1px solid white;
     text-align: center;
-    width: 80%;
+    width: 70%;
     margin-bottom: 20px;
    
 }
-
+#weather-container input, #weather-container button {
+    width: auto;
+    margin: 5px;
+}
 button {
     background: #debff4;
     color: white;
@@ -82,26 +85,35 @@ button:hover {
 }
 
 #hourly-forecast {
-    margin-top: 20px;
+    margin-top: 50px;
+    overflow-x: auto;
+    white-space: nowrap;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start; /* Asigură-te că elementele sunt aliniate la stânga */
+    align-items: center; /* Aliniază elementele pe axa verticală */
 }
 
 .hourly-item {
-    width: 60px;
-    text-align: center;
+    flex: 0 0 auto;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    color: white;
 }
 
 .hourly-item img {
     width: 30px;
     height: 30px;
-   
+    margin-bottom: 5px;
 }
 
 #hourly-heading {
     color: #fff;
     margin-top: 10px;
 }
+
 
 #weather-icon {
     width: 210px; 
