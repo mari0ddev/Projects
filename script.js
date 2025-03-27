@@ -125,6 +125,15 @@ function displayWeather(data) {
         else if (weatherMain.includes("Broken clouds")) {
             localImage = "images/cloudlyyy.png";
         }
+        localImage = "/images/cloudlyyy.png"; 
+        localImage = "/images/sunnyyyycloud.png";
+        localImage = "/images/rain.png"; 
+        localImage = "/images/sunpixel.png"; 
+        localImage = "/images/moon.png";
+        localImage = "/images/nightcloud.png";
+
+
+        
         tempDivInfo.innerHTML = `<p>${temperature}°C</p>`;
         weatherInfoDiv.innerHTML = `<p>${cityName}</p><p>${description}</p>`;
         weatherIcon.src = localImage;
