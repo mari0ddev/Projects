@@ -81,7 +81,7 @@ function getWeather() {
         });
 }
 
-// Funcție pentru a afisa detaliile vremii curente
+
 function displayWeather(data) {
     const tempDivInfo = document.getElementById('temp-div');
     const weatherInfoDiv = document.getElementById('weather-info');
@@ -122,7 +122,9 @@ function displayWeather(data) {
         } else if (weatherMain.includes("overcast")) {
             localImage = "images/cloudlyyy.png";
         }
-
+        else if (weatherMain.includes("Broken clouds")) {
+            localImage = "images/cloudlyyy.png";
+        }
         tempDivInfo.innerHTML = `<p>${temperature}°C</p>`;
         weatherInfoDiv.innerHTML = `<p>${cityName}</p><p>${description}</p>`;
         weatherIcon.src = localImage;
