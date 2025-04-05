@@ -5,7 +5,7 @@ A weather app that displays the current weather in a retro, pixelated style. It 
 ## 🔧 Technologies used
 - HTML, CSS (pixel art design)
 - JavaScript Vanilla
-- OpenWeather API
+- OpenWeather API (RESTful)
 
 ## 📋 Features
 - Search by city
