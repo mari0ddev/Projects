@@ -105,32 +105,23 @@ function displayWeather(data) {
         const humidity = data.main.humidity;
         const dewPoint = data.main.temp_min;
 
-        let localImage = "images/cersenin.png"; // Default: cer senin
+       let localImage = "images/cersenin.png"; // Default: cer senin
 
-        if (weatherMain.includes("cloud")) {
-            localImage = "images/clouddd.png";
-        } else if (weatherMain.includes("rain")) {
-            localImage = "images/rain.png";
-        } else if (weatherMain.includes("snow")) {
-            localImage = "images/snow.png";
-        } else if (weatherMain.includes("storm") || weatherMain.includes("thunder")) {
-            localImage = "images/rainyyyyyyy.png";
-        } else if (weatherMain.includes("sun")) {
-            localImage = "images/sunpixel.png";
-        } else if (weatherMain.includes("clear")) {
-            localImage = "images/sunnyyyycloud.png";
-        } else if (weatherMain.includes("overcast clouds")) {
-            localImage = "images/cloudlyyy.png";
-        }
-        else if (weatherMain.includes("Broken clouds")) {
-            localImage = "images/cloudlyyy.png";
-        }
-        localImage = "/images/cloudlyyy.png"; 
-        localImage = "/images/sunnyyyycloud.png";
-        localImage = "/images/rain.png"; 
-        localImage = "/images/sunpixel.png"; 
-        localImage = "/images/moon.png";
-        localImage = "/images/nightcloud.png";
+if (weatherMain.includes("cloud")) {
+    localImage = "images/clouddd.png";
+} else if (weatherMain.includes("rain")) {
+    localImage = "images/rain.png";
+} else if (weatherMain.includes("snow")) {
+    localImage = "images/snow.png";
+} else if (weatherMain.includes("storm") || weatherMain.includes("thunder")) {
+    localImage = "images/rainyyyyyyy.png";
+} else if (weatherMain.includes("sun")) {
+    localImage = "images/sunpixel.png";
+} else if (weatherMain.includes("clear")) {
+    localImage = "images/sunnyyyycloud.png";
+} else if (weatherMain.includes("overcast clouds") || weatherMain.includes("Broken clouds")) {
+    localImage = "images/cloudlyyy.png";
+}
 
 
         
