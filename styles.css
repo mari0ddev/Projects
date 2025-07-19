@@ -279,7 +279,7 @@ button:hover {
     background: rgba(255,255,255,0.2);
     top: -60px;
     left: 10%;
-    animation: rainDrop 0.7s linear infinite;
+    animation: rainDrop 0.8s linear infinite;
     box-shadow:
         10vw 0 rgba(255,255,255,0.2),
     20vw 0 rgba(255,255,255,0.2),
