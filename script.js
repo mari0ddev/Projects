@@ -1,7 +1,6 @@
 function getWeather() {
     const apiKey = '1206f392eeeb9ca5f310f5e7d3f6d40f';
 
-    // Traducerea orașelor
     const cityTranslations = {
         "bucuresti": "Bucharest",
         "cluj-napoca": "Cluj",
@@ -10,8 +9,6 @@ function getWeather() {
     };
 
     let city = document.getElementById('city').value.trim().toLowerCase();
-
-    // Verificăm dacă orașul introdus are o traducere în obiectul cityTranslations
     if (cityTranslations[city]) {
         city = cityTranslations[city];
     }
@@ -24,12 +21,12 @@ function getWeather() {
     const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
-    // Funcție pentru a afișa prognoza pe oră
+    // Afișăm prognoza pe următoarele ore
     function displayHourlyForecast(hourlyData) {
         const hourlyForecastDiv = document.getElementById('hourly-forecast');
         hourlyForecastDiv.innerHTML = '';
 
-        const next24Hours = hourlyData.slice(0, 8); // Afisăm prognoza pentru următoarele 8 ore
+        const next24Hours = hourlyData.slice(0, 8);
 
         next24Hours.forEach(item => {
             const dateTime = new Date(item.dt * 1000);
@@ -38,7 +35,6 @@ function getWeather() {
             const iconCode = item.weather[0].icon;
             const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
 
-            // HTML-ul pentru fiecare oră
             const hourlyItemHtml = `
                 <div class="hourly-item">
                     <span>${hour}:00</span>
@@ -65,7 +61,7 @@ function getWeather() {
             alert('Error fetching current weather data. Please try again.');
         });
 
-    // Obținem prognoza pe termen scurt
+    // Obținem prognoza
     fetch(forecastUrl)
         .then(response => response.json())
         .then(data => {
@@ -81,16 +77,36 @@ function getWeather() {
         });
 }
 
-
 function displayWeather(data) {
+    console.log("Starting displayWeather with data:", data);
     const tempDivInfo = document.getElementById('temp-div');
     const weatherInfoDiv = document.getElementById('weather-info');
     const weatherIcon = document.getElementById('weather-icon');
     const hourlyForecastDiv = document.getElementById('hourly-forecast');
+    const rainEffect = document.getElementById('rain');
+    console.log("rainEffect element:", rainEffect);
 
+    // Resetează conținutul
     weatherInfoDiv.innerHTML = '';
     hourlyForecastDiv.innerHTML = '';
     tempDivInfo.innerHTML = '';
+
+    // Resetează efectul de ploaie
+    if (rainEffect) {
+        rainEffect.classList.remove('active');
+    } else {
+        console.error("Element #rain not found in DOM");
+    }
+
+    const currentTime = new Date().getTime() / 1000;
+    const sunrise = data.sys.sunrise;
+    const sunset = data.sys.sunset;
+    const isDayTime = currentTime >= sunrise && currentTime < sunset;
+
+    const body = document.body;
+    body.classList.remove('day', 'night', 'day-background', 'night-background');
+    body.classList.add(isDayTime ? 'day' : 'night');
+    body.classList.add(isDayTime ? 'day-background' : 'night-background');
 
     if (data.cod === '404') {
         weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
@@ -105,26 +121,37 @@ function displayWeather(data) {
         const humidity = data.main.humidity;
         const dewPoint = data.main.temp_min;
 
-       let localImage = "images/cersenin.png"; // Default: cer senin
+        console.log("Weather main:", weatherMain, "Rain data:", data.rain);
 
-if (weatherMain.includes("cloud")) {
-    localImage = "images/clouddd.png";
-} else if (weatherMain.includes("rain")) {
-    localImage = "images/rain.png";
-} else if (weatherMain.includes("snow")) {
-    localImage = "images/snow.png";
-} else if (weatherMain.includes("storm") || weatherMain.includes("thunder")) {
-    localImage = "images/rainyyyyyyy.png";
-} else if (weatherMain.includes("sun")) {
-    localImage = "images/sunpixel.png";
-} else if (weatherMain.includes("clear")) {
-    localImage = "images/sunnyyyycloud.png";
-} else if (weatherMain.includes("overcast clouds") || weatherMain.includes("Broken clouds")) {
-    localImage = "images/cloudlyyy.png";
-}
+        let localImage = "images/cersenin.png";
 
+        // Prioritizează condițiile meteo
+        if (weatherMain.includes("rain")) {
+            localImage = "images/rain.png";
+        } else if (weatherMain.includes("storm") || weatherMain.includes("thunderstorm")) {
+            localImage = "images/rainyyyyyyy.png";
+        } else if (weatherMain.includes("snow")) {
+            localImage = "images/snow.png";
+        } else if (weatherMain.includes("cloud")) {
+            localImage = isDayTime ? "images/clouddd.png" : "images/cloudlyyy.png";
+        } else if (weatherMain.includes("sun") || weatherMain.includes("clear")) {
+            localImage = isDayTime ? "images/sunpixel.png" : "images/night.png";
+        } else if (weatherMain.includes("overcast clouds") || weatherMain.includes("broken clouds")) {
+            localImage = "images/cloudlyyy.png";
+        } else if (weatherMain.includes("scattered clouds")) {
+            localImage = "images/clouddd.png";
+        }
 
-        
+        console.log("Image set to:", localImage);
+
+        // Activează efectul de ploaie
+        if (rainEffect && (weatherMain.includes("rain") || weatherMain.includes("thunderstorm") || weatherMain.includes("drizzle"))) {
+            console.log("Activating rain effect for:", weatherMain);
+            rainEffect.classList.add('active');
+        } else {
+            console.log("No rain effect for:", weatherMain);
+        }
+
         tempDivInfo.innerHTML = `<p>${temperature}°C</p>`;
         weatherInfoDiv.innerHTML = `<p>${cityName}</p><p>${description}</p>`;
         weatherIcon.src = localImage;
@@ -141,7 +168,6 @@ if (weatherMain.includes("cloud")) {
     }
 }
 
-// Funcție pentru direcția vântului
 function getWindDirection(degree) {
     if (degree >= 0 && degree < 45) {
         return "N (Nord)";
@@ -162,11 +188,11 @@ function getWindDirection(degree) {
     }
 }
 
-// Event listener pentru Enter
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('city').addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
-            getWeather(); 
+            getWeather();
         }
     });
+    
 });
