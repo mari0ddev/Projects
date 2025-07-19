@@ -11,19 +11,24 @@ body {
     background-position: center; 
     background-repeat: no-repeat; 
     font-family: 'Minecraft', sans-serif;
-    
-    display: flex;
+
+     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
+    position: relative; /* ca overlay-ul să fie poziționat pe body */
+    overflow: hidden;
 }
 
 #weather-container {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(185, 185, 210, 0.3); /* culoare lună + opacitate */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color: white;
+    z-index: 2;
     backdrop-filter: blur(10px);
     text-align: center;
     max-width: 400px;
@@ -148,6 +153,9 @@ button:hover {
         width: 80px;
     }
 }
+/* Zi - fundal cald, senin */
+/* Fundal de zi */
+
 
 /* Overlayul galben ziua sau întunecat noaptea */
 .overlay {
@@ -293,76 +301,3 @@ button:hover {
         transform: translateY(130vh);
     }
 }
-@media screen and (max-width: 600px) {
-    #weather-container {
-        width: 90%;
-        padding: 15px;
-        backdrop-filter: blur(8px); /* Blur mai mic pentru performanță pe mobil */
-    }
-
-    input {
-        width: 100%;
-        padding: 8px;
-    }
-
-    button {
-        width: 100%;
-        padding: 10px;
-    }
-
-    #weather-icon {
-        width: 100px; /* Imagine mai mică pe mobil */
-    }
-
-    #hourly-forecast {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
-
-    .hourly-item {
-        width: 70px; /* Item mai mic pe mobil */
-    }
-
-    /* Ajustări ploaie pentru mobil */
-    .rain::before {
-        width: 1.5px; /* Picături și mai mici */
-        height: 60px;
-        animation: rainDrop 1.5s linear infinite; /* Mai lent */
-        box-shadow:
-            5vw 0 rgba(120, 160, 255, 0.9),
-            10vw 8px rgba(120, 160, 255, 0.9),
-            15vw 4px rgba(120, 160, 255, 0.9),
-            20vw 12px rgba(120, 160, 255, 0.9),
-            25vw 0 rgba(120, 160, 255, 0.9);
-    }
-
-    .rain::after {
-        width: 1px;
-        height: 50px;
-        animation: rainDrop 1.3s linear infinite 0.3s;
-        box-shadow:
-            5vw 0 rgba(120, 160, 255, 0.9),
-            10vw 8px rgba(120, 160, 255, 0.9),
-            15vw 4px rgba(120, 160, 255, 0.9);
-    }
-
-    /* Ajustări stele pentru mobil */
-    .stars::before {
-        width: 1.5px;
-        height: 1.5px;
-        animation: twinkle 2.5s ease-in-out infinite;
-        box-shadow:
-            10vw 10vh rgba(255, 255, 255, 0.8),
-            20vw 15vh rgba(255, 255, 255, 0.7),
-            30vw 5vh rgba(255, 255, 255, 0.8),
-            40vw 20vh rgba(255, 255, 255, 0.7);
-    }
-
-    .stars::after {
-        width: 1px;
-        height: 1px;
-        animation: twinkle 3s ease-in-out infinite 0.5s;
-        box-shadow:
-            5vw 10vh rgba(255, 255, 255, 0.7),
-            15vw 15vh rgba(255, 255, 255, 0.6);
-    }
