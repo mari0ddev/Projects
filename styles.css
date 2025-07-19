@@ -148,3 +148,148 @@ button:hover {
         width: 80px;
     }
 }
+
+/* Overlayul galben ziua sau întunecat noaptea */
+.overlay {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    transition: background-color 1s ease;
+}
+
+/* Zi: lumină caldă */
+.day .overlay {
+    background-color: rgba(199, 199, 55, 0.3);
+    opacity: 20%; /* galben soft */
+}
+
+/* Noapte: cer închis */
+.night .overlay {
+    background-color: rgba(0, 0, 30, 0.9); /* albastru închis semi-transparent */
+}
+
+.sky-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2; /* peste overlay sau ce ai */
+  pointer-events: none;
+}
+
+.sky-stars::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  z-index: 5;
+  background: white;
+  opacity: 0.7;
+  border-radius: 50%;
+   pointer-events: none;
+  box-shadow:
+    10px 20px white,
+    50px 80px white,
+    100px 150px white,
+    150px 200px white,
+    200px 100px  white,
+    300px 400px  white,
+    400px 300px white,
+    500px 500px  white,
+    600px 200px  white,
+    700px 350px  white,
+    800px 100px white,
+    900px 450px  white,
+    950px 600px   white,
+    400px 700px   white,
+    1600px 400px white,
+    1500px 100px white,
+    1300px 200px white,
+    1400px 300px white,
+    1200px 500px white,
+    1500px 600px white,
+    1100px 300px white,
+    1400px 600px white,
+    1000px 200px white,
+    1000px 800px    white;
+  animation: starBlink 3s ease-in-out infinite alternate;
+}
+
+@keyframes starBlink {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 700; /* Z-index mare pentru vizibilitate */
+    overflow: hidden;
+    display: none;
+}
+
+.rain.active {
+    display: block;
+}
+
+.rain::before {
+    content: "";
+    position: absolute;
+    width: 2px; /* Picături mai subțiri */
+    height: 80px; /* Picături mai scurte */
+    background: rgba(255,255,255,0.2); /* Culoare clară */
+    top: -80px;
+    left: 5%;
+    animation: rainDrop 0.4s linear infinite; /* Mai lent */
+    box-shadow:
+         10vw 0 rgba(255,255,255,0.2),
+    20vw 0 rgba(255,255,255,0.2),
+    30vw 0 rgba(255,255,255,0.2),
+    40vw 0 rgba(255,255,255,0.2),
+    50vw 0 rgba(255,255,255,0.2),
+    60vw 0 rgba(255,255,255,0.2),
+    70vw 0 rgba(255,255,255,0.2),
+    80vw 0 rgba(255,255,255,0.2),
+    90vw 0 rgba(255,255,255,0.2),
+    100vw 0 rgba(255,255,255,0.2);
+        
+}
+
+.rain::after {
+    content: "";
+    position: absolute;
+    width: 1.5px; /* Picături și mai subțiri */
+    height: 30px; /* Picături mai scurte */
+    background: rgba(255,255,255,0.2);
+    top: -60px;
+    left: 10%;
+    animation: rainDrop 0.7s linear infinite;
+    box-shadow:
+        10vw 0 rgba(255,255,255,0.2),
+    20vw 0 rgba(255,255,255,0.2),
+    30vw 0 rgba(255,255,255,0.2),
+    40vw 0 rgba(255,255,255,0.2),
+    50vw 0 rgba(255,255,255,0.2),
+    60vw 0 rgba(255,255,255,0.2),
+    70vw 0 rgba(255,255,255,0.2),
+    80vw 0 rgba(255,255,255,0.2),
+    90vw 0 rgba(255,255,255,0.2),
+    100vw 0 rgba(255,255,255,0.2);
+        
+        
+}
+
+
+@keyframes rainDrop {
+    to {
+        transform: translateY(130vh);
+    }
+}
