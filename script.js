@@ -141,6 +141,9 @@ function displayWeather(data) {
         } else if (weatherMain.includes("scattered clouds")) {
             localImage = "images/clouddd.png";
         }
+        else if (weatherMain.includes("few clouds")) {
+            localImage = "images/clouddd.png";
+        }
 
         console.log("Image set to:", localImage);
 
