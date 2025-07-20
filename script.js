@@ -106,7 +106,7 @@ function displayWeather(data) {
         const humidity = data.main.humidity;
         const dewPoint = data.main.temp_min;
 
-        let localImage = "images/cersenin.png"; // Default cer senin
+        let localImage = "images/cersenin.png"; // Default: cer senin
 
         // Logică unificată pentru imagini
         if (weatherMain.includes("rain")) {
@@ -116,7 +116,9 @@ function displayWeather(data) {
         } else if (weatherMain.includes("snow")) {
             localImage = "images/snow.png";
         } else if (weatherMain.includes("drizzle")) {
-            localImage = "images/rain.png"; 
+            localImage = "images/rain.png"; // Drizzle folosește aceeași imagine ca rain
+        } else if (weatherMain.includes("few")) { // Adăugat suport pentru "few clouds"
+            localImage = isDayTime ? "images/clouddd.png" : "images/cloudlyyy.png";
         } else if (weatherMain.includes("cloud")) {
             localImage = isDayTime ? "images/clouddd.png" : "images/cloudlyyy.png";
         } else if (weatherMain.includes("clear")) {
