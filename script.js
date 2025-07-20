@@ -141,9 +141,7 @@ function displayWeather(data) {
         } else if (weatherMain.includes("scattered clouds")) {
             localImage = "images/clouddd.png";
         }
-       else if (weatherMain.includes("few clouds") || weatherMain.includes("broken clouds")) {
-            localImage = "images/clouddd.png";
-        console.log("Image set to:", localImage);
+     
 
         // Activează efectul de ploaie
         if (rainEffect && (weatherMain.includes("rain") || weatherMain.includes("thunderstorm") || weatherMain.includes("drizzle"))) {
